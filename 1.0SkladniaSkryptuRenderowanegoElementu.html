@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jsx babel i pierwsza aplikacja react</title>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.19.0/babel.min.js"
+      integrity="sha512-g9FNDzZ0L1+NX84LEwshW1z3FXXTMZccijKm3c7GQGHP440YRJ5JN57OzrJvdHMEWazpbDyh21x/AaAq+gOmmw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div id="content-item"></div>
+    <div id="item"></div>
+    <div id="content-item-embed"></div>
+    <script type="text/babel">
+      const formatName = (user) => {
+        return user.firstName + " " + user.lastName;
+      };
+
+      const user = {
+        firstName: "Grzegorz",
+        lastName: "Brzęczyszczykiewicz",
+        avatarURL:
+          "https://cdn.pixabay.com/photo/2019/12/17/12/58/reptile-4701567_960_720.jpg",
+      };
+      function getGreeting(user) {
+        if (user) {
+          return <h1>Witaj, {formatName(user)}!</h1>;
+        }
+        return <h1>Witaj, nieznajomy.</h1>;
+      }
+
+      const element = <h1>{getGreeting(user)}</h1>;
+      const root = ReactDOM.createRoot(document.getElementById("content-item"));
+      root.render(element);
+
+      const element1 = <img src={user.avatarURL}></img>;
+      const root1 = ReactDOM.createRoot(document.getElementById("item"));
+      root1.render(element1);
+
+      const element2 = (
+        <div>
+          <h1>Witaj!</h1>
+          <h2>Dobrze cię widzieć.</h2>
+        </div>
+      );
+      const root2 = ReactDOM.createRoot(
+        document.getElementById("content-item-embed")
+      );
+      root2.render(element2);
+
+      /* Note: this structure is simplified   //obiekt zwany elementem reactowym-w ten sposob react obsluguje węzły swojego wirtualnego drzewa DOM
+      const element = {
+        type: "h1",
+        props: {
+          className: "greeting",
+          children: "Witaj, świecie",
+        },
+      };*/
+
+      //jsx to string prawidlowo interpretujacy znaczniki html i wyrazenia js ujete w nawiasach klamrowych
+      //jsx wystepuje tylko w elemencie ktory mamy renderowac, pozostaly kod to js
+    </script>
+  </body>
+</html>
